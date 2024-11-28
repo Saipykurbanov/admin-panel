@@ -6,11 +6,15 @@ import Store from "./Store";
 export default function useMain() {
 
     const [load, setLoad] = useState(false)
+    const [auth, setAuth] = useState(() => {
+        const local = localStorage.getItem('accessToken')
+        return local ? true : false
+    })
 
     const mode = useMode()
 
     useEffect(() => {
-        
+                
         setTimeout(() => {
             setLoad(true)
         }, 3100)
@@ -21,5 +25,9 @@ export default function useMain() {
 
     }, [])
 
-    return { load, mode }
+    return {
+        load, 
+        mode,
+        auth
+    }
 }

@@ -1,6 +1,40 @@
-@import './../../../css/common.css';
+@import './../../../css/common';
 
 
 .sing_in {
-    
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    form {
+        width: 100%;
+        max-width: 500px;
+        min-height: 40dvh;
+        background-color: var(--grey);
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        @include adaptiveProperty(padding, 30, 20);
+        h2 {
+            text-align: center;
+            @include adaptiveFont(20, 18);
+        }
+        .input_block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            .error {
+                @include adaptiveFont(14, 12);
+                color: var(--red);
+                height: 15px;
+            }
+        }
+    }
 }

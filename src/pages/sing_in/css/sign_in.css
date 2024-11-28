@@ -1,1 +1,66 @@
-@import './../../../css/common.css';/*# sourceMappingURL=sign_in.css.map */
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.sing_in {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.sing_in form {
+  width: 100%;
+  max-width: 500px;
+  min-height: 40dvh;
+  background-color: var(--grey);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+@media (max-width: 768px) {
+  .sing_in form {
+    padding: calc(20px + 17 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .sing_in form {
+    padding: calc(20px + 10 * 0.0520833333vw);
+  }
+}
+.sing_in form h2 {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .sing_in form h2 {
+    font-size: calc(18px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .sing_in form h2 {
+    font-size: calc(18px + 2 * 0.0520833333vw);
+  }
+}
+.sing_in form .input_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+.sing_in form .input_block .error {
+  color: var(--red);
+  height: 15px;
+}
+@media (max-width: 768px) {
+  .sing_in form .input_block .error {
+    font-size: calc(12px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .sing_in form .input_block .error {
+    font-size: calc(12px + 2 * 0.0520833333vw);
+  }
+}/*# sourceMappingURL=sign_in.css.map */
