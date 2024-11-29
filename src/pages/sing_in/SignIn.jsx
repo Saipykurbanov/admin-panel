@@ -15,8 +15,8 @@ const SignIn = () => {
                 <h2>Админ-панель</h2>
 
                 <div className="input_block">
-                    <Input placeholder={'Логин'} name={'email'} changeValue={auth.changeValue} value={auth.inputs.email}/>
-                    <Input type={'password'} placeholder={'Пароль'} name={'password'} changeValue={auth.changeValue} value={auth.inputs.password}/>
+                    <Input mode={auth.error ? 'input_error' : ''} placeholder={'Логин'} name={'email'} changeValue={auth.changeValue} value={auth.inputs.email}/>
+                    <Input mode={auth.error ? 'input_error' : ''} type={'password'} placeholder={'Пароль'} name={'password'} changeValue={auth.changeValue} value={auth.inputs.password}/>
                     <div className='error'>{auth.error || ''}</div>
                 </div>
 

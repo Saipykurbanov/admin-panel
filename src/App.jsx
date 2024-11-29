@@ -28,7 +28,7 @@ const App = () => {
                 
                 <Dashboard />
 
-                <MainContainer />
+                <MainContainer user={main.user} />
 
               </Router>
 

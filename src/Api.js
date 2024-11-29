@@ -36,14 +36,6 @@ Api.auth = async (body) => {
         res = await res.json()
 
         return res
-        // if(res.status === 200) {
-        //     localStorage.setItem('accessToken', res.accessToken)
-        //     return 'success'
-        // } else if (res.status === 401){
-        //     return '401'  
-        // } else {
-        //     return 'error'
-        // }
 
     } catch(e) {
         console.log(e)
@@ -91,7 +83,36 @@ Api.delete = async (path) => {
     try {
 
         let res = await fetch(`${Api.url}${path}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: localStorage.getItem('accessToken')
+            }
+        })
+
+        res = await res?.json()
+
+        if(res.success) {
+            return res
+        } else {
+            return 'error'
+        }
+
+    } catch(e) {
+        return 'error'
+    }
+}
+
+Api.post = async (body, path) => {
+    try {
+
+        let res = await fetch(`${Api.url}${path}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify(body)
         })
 
         res = await res?.json()

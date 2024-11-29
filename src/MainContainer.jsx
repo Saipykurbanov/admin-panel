@@ -7,11 +7,11 @@ import Home from './pages/home/Home';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
 
-const MainContainer = () => {
+const MainContainer = ({user}) => {
 
     return (
         <div className="main_container">
-            <Header />
+            <Header user={user}/>
             <Routes>
                 <Route path='/' element={<Home />}/>
                 <Route path='/orders' element={<Orders />}/>
