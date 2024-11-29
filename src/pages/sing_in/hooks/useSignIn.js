@@ -23,15 +23,23 @@ export default function useSignIn() {
 
         let res = await Api.auth(inputs)
 
-        if(res === 'error') {
-            setError('Неверный логин или пароль')
-            return
-        } else if(res === '401') {
-            setError('У вас не хватает прав')
-            return
-        } else {
+        console.log(res)
+        if(res.status === 200) {
+            localStorage.setItem('accessToken', res.accessToken)
             return window.location.reload()
+        } else {
+            setError(res.message)
+            return
         }
+        // if(res === 'error') {
+        //     setError('Неверный логин или пароль')
+        //     return
+        // } else if(res === '401') {
+        //     setError('У вас не хватает прав')
+        //     return
+        // } else {
+        //     return window.location.reload()
+        // }
     }
 
     return {

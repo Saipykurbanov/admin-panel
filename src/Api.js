@@ -2,6 +2,26 @@ const Api = {}
 
 Api.url = 'http://localhost:4000/'
 
+Api.init = async (token) => {
+    try {
+
+        let res = await fetch(`${Api.url}api/users/init`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: token
+            }
+        })
+
+        res = await res.json()
+
+        return res
+
+    } catch(e) {
+        return 'error'
+    }
+}
+
 Api.auth = async (body) => {
     try {
 
@@ -15,14 +35,15 @@ Api.auth = async (body) => {
 
         res = await res.json()
 
-        if(res.status === 200) {
-            localStorage.setItem('accessToken', res.accessToken)
-            return 'success'
-        } else if (res.status === 401){
-            return '401'  
-        } else {
-            return 'error'
-        }
+        return res
+        // if(res.status === 200) {
+        //     localStorage.setItem('accessToken', res.accessToken)
+        //     return 'success'
+        // } else if (res.status === 401){
+        //     return '401'  
+        // } else {
+        //     return 'error'
+        // }
 
     } catch(e) {
         console.log(e)
