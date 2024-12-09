@@ -2,6 +2,47 @@ const Api = {}
 
 Api.url = 'http://localhost:4000/'
 
+Api.init = async (token) => {
+    try {
+
+        let res = await fetch(`${Api.url}api/users/init`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: token
+            }
+        })
+
+        res = await res.json()
+
+        return res
+
+    } catch(e) {
+        return 'error'
+    }
+}
+
+Api.auth = async (body) => {
+    try {
+
+        let res = await fetch(`${Api.url}api/users/signin`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
+            },
+            body: JSON.stringify(body)
+        })
+
+        res = await res.json()
+
+        return res
+
+    } catch(e) {
+        console.log(e)
+        return 'error'
+    }
+}
+
 Api.get = async (path) => {
 
     try {
@@ -42,7 +83,36 @@ Api.delete = async (path) => {
     try {
 
         let res = await fetch(`${Api.url}${path}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: localStorage.getItem('accessToken')
+            }
+        })
+
+        res = await res?.json()
+
+        if(res.success) {
+            return res
+        } else {
+            return 'error'
+        }
+
+    } catch(e) {
+        return 'error'
+    }
+}
+
+Api.post = async (body, path) => {
+    try {
+
+        let res = await fetch(`${Api.url}${path}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify(body)
         })
 
         res = await res?.json()

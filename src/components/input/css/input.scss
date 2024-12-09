@@ -20,6 +20,9 @@
             width: 0px;
         }
     }
+    &.input_error {
+        border-bottom: 2px solid var(--red);
+    }
 }
 
 .checkbox {

@@ -28,6 +28,9 @@
 .main_input.area::-webkit-scrollbar {
   width: 0px;
 }
+.main_input.input_error {
+  border-bottom: 2px solid var(--red);
+}
 
 .checkbox {
   display: flex;

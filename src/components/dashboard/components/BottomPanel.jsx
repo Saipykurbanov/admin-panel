@@ -2,9 +2,19 @@ import React from 'react';
 import ModeBtn from '../../mode_button/ModeBtn';
 
 const BottomPanel = () => {
+
+    const logOut = () => {
+        let token = localStorage.getItem('accessToken')
+
+        if(token) {
+            localStorage.removeItem('accessToken')
+            return window.location.reload()
+        }
+    }
+
     return (
         <div className='bottom_panel'>
-            <div className="main_icon">
+            <div className="main_icon" onClick={logOut}>
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>

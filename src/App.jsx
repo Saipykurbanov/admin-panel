@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import MainContainer from './MainContainer';
@@ -10,34 +10,39 @@ import Orders from './components/popups/Orders';
 import Notes from './components/popups/Notes';
 import Categories from './components/popups/Categories';
 import AddProductModal from './modal/add-product/AddProductModal';
+import SignIn from './pages/sing_in/SignIn';
 
 
 const App = () => {
 
   const main = useMain()
 
-  return (
+  return (  
     <>
       {main.load ? 
-        <div className='main_wrapper'>
+        <>
+          {main.auth 
+          ?<div className='main_wrapper'>
 
-          <Router>
-            
-            <Dashboard />
+              <Router>
+                
+                <Dashboard />
 
-            <MainContainer />
+                <MainContainer user={main.user} />
 
-          </Router>
+              </Router>
 
-          {/*---- Всплывающие окна -----*/}
-          <Calendar />
-          <MainPopUp />
-          <Orders />
-          <Notes />
-          <Categories />
-          <AddProductModal />
+              {/*---- Всплывающие окна -----*/}
+              <Calendar />
+              <MainPopUp />
+              <Orders />
+              <Notes />
+              <Categories />
+              <AddProductModal />
 
-        </div>
+            </div>
+          :<SignIn />}
+        </>
       :
         <div className="main_loading">
           <Loading />

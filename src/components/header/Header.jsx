@@ -3,7 +3,7 @@ import './css/header.css'
 import Store from '../../Store';
 
 
-const Header = () => {
+const Header = ({user}) => {
 
     const [title, setTitle] = useState('Главная')
     Store.useListener('title', setTitle)
@@ -13,7 +13,7 @@ const Header = () => {
             <h2>{title}</h2>
             <nav></nav>
             <div className="user">
-                Земине Османова
+                {user?.name} {user?.surname}
             </div>
         </header>
     );
