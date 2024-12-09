@@ -175,11 +175,20 @@
 }
 .add_product_modal .slider_container .main_slider .nav_arrow svg .main_icon_path path,
 .add_product_modal .slider_container .main_slider .nav_arrow svg .main_icon_path circle {
-  stroke: var(--text-color-dark);
+  transition: 0.4s;
+  stroke: var(--text-color-light);
 }
 @media screen and (min-width: 992px) {
   .add_product_modal .slider_container .main_slider .nav_arrow:hover {
     background: var(--main-color);
+  }
+  .add_product_modal .slider_container .main_slider .nav_arrow:hover svg {
+    width: 50px;
+    height: 50px;
+  }
+  .add_product_modal .slider_container .main_slider .nav_arrow:hover svg .main_icon_path path,
+  .add_product_modal .slider_container .main_slider .nav_arrow:hover svg .main_icon_path circle {
+    stroke: var(--text-color-dark);
   }
 }
 .add_product_modal .slider_container .thumb_slider {
@@ -263,12 +272,27 @@
 .add_product_modal .slider_container .thumb_slider .thumb__slide.active .label_container {
   display: flex;
 }
+.add_product_modal .slider_container .thumb_slider .thumb__slide.delete {
+  background: transparent;
+  transition-delay: 0.3s;
+  width: 0;
+  margin-right: 0;
+}
+.add_product_modal .slider_container .thumb_slider .thumb__slide.delete img {
+  opacity: 0;
+}
+.add_product_modal .slider_container .thumb_slider .thumb__slide.delete .label_container {
+  transition: 0.3s !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
 .add_product_modal .slider_container .thumb_slider .thumb__slide img {
   display: block;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  transition: 0.4s;
 }
 .add_product_modal .slider_container .thumb_slider .thumb__slide .cross {
   position: absolute;

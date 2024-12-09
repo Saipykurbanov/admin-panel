@@ -49,7 +49,7 @@ const Slider = () => {
                         <></>
                     }
 
-                    <label className="add_image" htmlFor='thumb_slider__add'>
+                    <label className="add_image" htmlFor='thumb_slider__add' ref={slider.addImgBtn}>
                         <div className="main_cross"></div>
                         <input type="file" multiple={'multiple'} id='thumb_slider__add' onChange={slider.addNewImage}/>
                     </label>

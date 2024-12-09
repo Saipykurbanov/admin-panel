@@ -7,6 +7,7 @@ export default function useSlider () {
     const mainSlider = useRef(null)
     const thumbSlider = useRef(null)
     const thumbSliderTrack = useRef(null)
+    const addImgBtn = useRef(null)
     const [isDrag, setIsDrag] = useState(false)
     const [thumbSliderScroll, setThumbSliderScroll] = useState(0)
     const [slideNum, setSlideNum] = useState(0)
@@ -15,19 +16,47 @@ export default function useSlider () {
     const deleteSlide = (e, index) => {
         e.stopPropagation()
         let list = structuredClone(slideList)
-        list.splice(index, 1)
-        setSlideList(list)
+        const sliderWidth = thumbSlider.current.offsetWidth
+        const trackWidth = thumbSliderTrack.current.offsetWidth
 
-        console.log(index, slideNum)
-        if(index === slideNum) {
-            if(index <= 0) {
-                setSlideNum(index + 1)
-            } else {
-                setSlideNum(prev => prev - 1)
+        // const thumblist = thumbSliderTrack.current.querySelectorAll('.thumb__slide')
+        // const mainlist = mainSlider.current.querySelectorAll('.slider__slide')
+        // console.log(mainlist)
+        // mainlist.forEach((el) => {
+        //     if(el.classList.contains('active')) {
+        //         el.classList.remove('active')
+        //     }
+        // })
+        // mainlist[index].style.opacity = '0'
+        // thumblist[index].classList.add('delete')
+
+        setTimeout(() => {
+            list.splice(index, 1)
+            console.log(list)
+            setSlideList(list)
+
+            if(index === slideList.length - 1) {
+                setSlideNum(index - 1)
+                setThumbSliderScroll(trackWidth > sliderWidth ? trackWidth - sliderWidth : 0)
+                return
+            } else if (trackWidth > sliderWidth){
+                let distance = slideDistance(index)
+    
+                if(distance > (sliderWidth / 2)) {
+                    let scrollLimit = trackWidth - sliderWidth
+                    let scroll = distance - (sliderWidth / 2)
+    
+                    setThumbSliderScroll(prev => prev + scroll > scrollLimit ? scrollLimit : prev + scroll)
+                } else if(distance < (sliderWidth / 2)) {
+                    let scroll = (sliderWidth / 2) - distance
+    
+                    setThumbSliderScroll(prev => prev - scroll <= 0 ? 0 : prev - scroll)
+                }
+    
             }
-        }
+            setSlideNum(index)
+        }, 400)
 
-        setSlideNum(prev => prev - 1)
     }
 
     const addNewImage = (e) => {
@@ -42,6 +71,14 @@ export default function useSlider () {
             list.push(URL.createObjectURL(e.target.files[i]))
         }
 
+        
+        const newWidth = addImgBtn.current.offsetWidth + (list.length * (addImgBtn.current.offsetWidth + 15))
+        
+        console.log(newWidth, thumbSlider.current.offsetWidth)
+        
+        setThumbSliderScroll(newWidth > thumbSlider.current.offsetWidth ?
+            newWidth - thumbSlider.current.offsetWidth : 0)
+        
         setSlideList(list)
 
         setSlideNum(list.length - 1)
@@ -185,5 +222,16 @@ export default function useSlider () {
         setIsDrag(false)
     }
 
-    return {mainSlider, thumbSlider, thumbSliderTrack, slideList, slideNum, thumbSliderScroll, changeSlideNum, nextSlide, prevSlide, addNewImage, deleteSlide}
+    return {mainSlider,
+            thumbSlider, 
+            thumbSliderTrack, 
+            slideList, 
+            slideNum, 
+            thumbSliderScroll, 
+            addImgBtn, 
+            changeSlideNum, 
+            nextSlide, 
+            prevSlide, 
+            addNewImage, 
+            deleteSlide}
 }

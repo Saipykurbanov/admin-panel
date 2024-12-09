@@ -29,6 +29,8 @@ export default function useProducts() {
         }, 1000)
     })
 
+    
+
     useEffect(() => {
         (async () => {
 
